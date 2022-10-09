@@ -21,10 +21,7 @@ public class UsbSerialProber
         _probeTable = probeTable;
     
 
-    public static UsbSerialProber GetDefaultProber()
-    {
-        return new UsbSerialProber(GetDefaultProbeTable());
-    }
+    public static UsbSerialProber GetDefaultProber() => new (GetDefaultProbeTable());
 
     public static ProbeTable DefaultProbeTable => GetDefaultProbeTable();
 

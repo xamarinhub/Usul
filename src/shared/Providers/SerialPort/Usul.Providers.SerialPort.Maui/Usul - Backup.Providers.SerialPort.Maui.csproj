@@ -27,15 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="SerialPortProviderMaui.cs">
-	    <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Folder Include="Platforms\iOS\" />
-	  <Folder Include="Platforms\MacCatalyst\" />
-	  <Folder Include="Platforms\Windows\" />
 	</ItemGroup>
 
 </Project>

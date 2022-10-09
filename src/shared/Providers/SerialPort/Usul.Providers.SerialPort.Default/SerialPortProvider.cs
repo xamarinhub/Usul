@@ -1,18 +1,11 @@
-﻿using System.Diagnostics.Contracts;
-using Usul.Providers;
-using Usul.Providers.SerialPort;
-
-namespace Usul.SerialPort.Default;
+﻿namespace Usul.Providers.SerialPort.Default;
 
 public class SerialPortProvider : Provider, ISerialPortProvider
 {
-    public IList<string> GetPortNames() =>
-        Port.GetPortNames();
+    public Task<IList<string>> GetPortNamesAsync() =>
+        Task.FromResult<IList<string>>(Port.GetPortNames());
 
-    public virtual ISerialPort Open(SerialPortConfiguration configuration)
-    {
-        Contract.Requires(configuration is not null);
-        return new Usul.SerialPort.Default.SerialPort(this, configuration!);
-    }
+    public virtual Task<ISerialPort> OpenAsync(SerialPortConfiguration configuration) =>
+        Task.FromResult<ISerialPort>(new SerialPort(this, configuration));
 }
 

@@ -13,17 +13,17 @@ namespace Usul.Providers.SerialPort.Maui.Implementation.Extensions;
 
 /// <summary>
 /// Work around for faulty JNI wrapping in Xamarin library.  Fixes a bug 
-/// where binding for Java.Nio.ByteBuffer.Get(byte[], int, int) allocates a new temporary 
+/// where binding for Java.Nio.ByteBuffer.GetBuffer(byte[], int, int) allocates a new temporary 
 /// Java byte array on every call 
 /// See https://bugzilla.xamarin.com/show_bug.cgi?id=31260
 /// and http://stackoverflow.com/questions/30268400/xamarin-implementation-of-bytebuffer-get-wrong
 /// </summary>
 public static class BufferExtensions
 {
-    static IntPtr _byteBufferClassRef;
-    static IntPtr _byteBufferGetBii;
+    private static IntPtr _byteBufferClassRef;
+    private static IntPtr _byteBufferGetBii;
 
-    public static ByteBuffer Get(this ByteBuffer buffer, JavaArray<Java.Lang.Byte> dst, int dstOffset, int byteCount)
+    public static ByteBuffer GetBuffer(this ByteBuffer buffer, JavaArray<Java.Lang.Byte> dst, int dstOffset, int byteCount)
     {
         if (_byteBufferClassRef == IntPtr.Zero)
         {
@@ -47,9 +47,7 @@ public static class BufferExtensions
         var resultHandle = JNIEnv.CallObjectMethod(buffer.Handle, methodId);
 
         var result = JNIEnv.GetArray<byte>(resultHandle);
-
         JNIEnv.DeleteLocalRef(resultHandle);
-
         return result;
     }
 }

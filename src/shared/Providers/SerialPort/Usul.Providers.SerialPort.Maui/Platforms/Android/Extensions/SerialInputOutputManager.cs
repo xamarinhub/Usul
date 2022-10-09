@@ -24,6 +24,7 @@ public class SerialInputOutputManager : IDisposable
 
     private readonly UsbSerialPort _port;
     private byte[] _buffer;
+    private bool _disposed;
     private CancellationTokenSource _cancelationTokenSource;
 
     public SerialInputOutputManager(UsbSerialPort port)
@@ -123,10 +124,6 @@ public class SerialInputOutputManager : IDisposable
     }
 
 
-    #region Dispose pattern implementation
-
-    private bool _disposed;
-
     protected virtual void Dispose(bool disposing)
     {
         if (_disposed)
@@ -141,10 +138,8 @@ public class SerialInputOutputManager : IDisposable
     }
 
     ~SerialInputOutputManager() =>
-    
         Dispose(false);
     
-
     public void Dispose()
     {
         Dispose(true);
@@ -152,6 +147,5 @@ public class SerialInputOutputManager : IDisposable
     }
 
 
-    #endregion
 
 }

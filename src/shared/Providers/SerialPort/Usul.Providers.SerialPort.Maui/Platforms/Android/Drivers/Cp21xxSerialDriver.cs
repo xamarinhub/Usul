@@ -46,7 +46,7 @@ public class Cp21xxSerialDriver : UsbSerialDriver
         private const int FLUSH_READ_CODE = 0x0a;
         private const int FLUSH_WRITE_CODE = 0x05;
 
-        private const int GET_MODEM_STATUS_REQUEST = 0x08; // 0x08 Get modem status. 
+        private const int GET_MODEM_STATUS_REQUEST = 0x08; // 0x08 GetBuffer modem status. 
         private const int MODEM_STATUS_CTS = 0x10;
         private const int MODEM_STATUS_DSR = 0x20;
         private const int MODEM_STATUS_RI = 0x40;
@@ -287,7 +287,7 @@ public class Cp21xxSerialDriver : UsbSerialDriver
                     0, 0, data, data.Length, USB_WRITE_TIMEOUT_MILLIS);
             if (result != 1)
             {
-                throw new IOException("Get modem status failed: result=" + result);
+                throw new IOException("GetBuffer modem status failed: result=" + result);
             }
             return data[0];
         }

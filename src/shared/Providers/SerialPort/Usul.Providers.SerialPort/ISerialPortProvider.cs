@@ -2,8 +2,8 @@
 
 public interface ISerialPortProvider : IProvider
 {
-    IList<string> GetPortNames();
+    Task<IList<string>> GetPortNamesAsync();
 
-    ISerialPort Open(SerialPortConfiguration configuration);
+    Task<ISerialPort> OpenAsync(SerialPortConfiguration configuration);
 }
 

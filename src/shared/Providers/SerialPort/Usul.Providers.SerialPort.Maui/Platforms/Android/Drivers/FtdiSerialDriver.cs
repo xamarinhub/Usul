@@ -379,7 +379,7 @@ public class FtdiSerialDriver : UsbSerialDriver
                 var result = _connection.ControlTransfer((UsbAddressing)REQTYPE_DEVICE_TO_HOST, GET_MODEM_STATUS_REQUEST,
                         0, _portNumber + 1, data, data.Length, USB_WRITE_TIMEOUT_MILLIS);
                 if (result != 2) {
-                    throw new IOException("Get modem status failed: result=" + result);
+                    throw new IOException("GetBuffer modem status failed: result=" + result);
                 }
                 return data[0];
             }

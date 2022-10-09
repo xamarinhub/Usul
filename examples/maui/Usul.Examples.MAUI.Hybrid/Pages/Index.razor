@@ -18,17 +18,19 @@ Info: @_info
     private string _portName;
     private string _info;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         _serialPortProvider = ProviderManager.GetProvider<ISerialPortProvider>();
-        Scan();
+        await Scan();
     }
 
-    private void Scan()
+
+    private async Task Scan()
     {
-        foreach (var portName in _serialPortProvider.GetPortNames())
+        var ports = await _serialPortProvider.GetPortNamesAsync();
+        foreach (var portName in ports)
         {
-            using var serialPort = _serialPortProvider.Open(new SerialPortConfiguration(portName));
+            using var serialPort = await _serialPortProvider.OpenAsync(new SerialPortConfiguration(portName));
             var result = GetInfo(serialPort);
             if (string.IsNullOrEmpty(result))
             {

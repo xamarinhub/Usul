@@ -1,6 +1,4 @@
-﻿using Usul.SerialPort.Default;
-
-namespace Usul.Providers.SerialPort.Default;
+﻿namespace Usul.Providers.SerialPort.Default;
 
 public static class ProviderManagerExtensions
 {

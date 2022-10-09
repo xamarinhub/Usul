@@ -1,6 +1,4 @@
-﻿using Usul.Providers.SerialPort;
-
-namespace Usul.SerialPort.Default;
+﻿namespace Usul.Providers.SerialPort.Default;
 
 internal static class ParityExtensions
 {

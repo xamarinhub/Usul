@@ -14,7 +14,7 @@ namespace Usul.Providers.SerialPort.Maui.Implementation.Extensions;
 
 public sealed class UsbSerialPortInfo : Java.Lang.Object, IParcelable
 {
-    static readonly IParcelableCreator _creator = new ParcelableCreator();
+    private static readonly IParcelableCreator _creator = new ParcelableCreator();
 
     [ExportField("CREATOR")]
     public static IParcelableCreator GetCreator() => _creator;
@@ -44,11 +44,7 @@ public sealed class UsbSerialPortInfo : Java.Lang.Object, IParcelable
 
     public int PortNumber { get; set; }
 
-
-    public int DescribeContents()
-    {
-        return 0;
-    }
+    public int DescribeContents() => 0;
 
     public void WriteToParcel(Parcel dest, ParcelableWriteFlags flags)
     {
@@ -57,11 +53,8 @@ public sealed class UsbSerialPortInfo : Java.Lang.Object, IParcelable
         dest.WriteInt(PortNumber);
     }
 
-
     public sealed class ParcelableCreator : Java.Lang.Object, IParcelableCreator
     {
-
-
         public Java.Lang.Object CreateFromParcel(Parcel parcel) => new UsbSerialPortInfo(parcel);
 
         // ReSharper disable once CoVariantArrayConversion

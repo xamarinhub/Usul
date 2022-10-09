@@ -258,7 +258,7 @@ public class CdcAcmSerialDriver : UsbSerialDriver
                     // see https://forums.xamarin.com/discussion/comment/238396/#Comment_238396
                     //
                     // Old work around:
-                    // as a work around, we populate dest with a call to buf.Get()
+                    // as a work around, we populate dest with a call to buf.GetBuffer()
                     // see https://bugzilla.xamarin.com/show_bug.cgi?id=20772
                     // and https://bugzilla.xamarin.com/show_bug.cgi?id=31260
 
@@ -284,7 +284,7 @@ public class CdcAcmSerialDriver : UsbSerialDriver
 
                         // 1st work around, no longer used
                         //buf.Rewind();
-                        //buf.Get(dest, 0, dest.Length);
+                        //buf.GetBuffer(dest, 0, dest.Length);
 
                         System.Buffer.BlockCopy(buf.ToByteArray(), 0, dest, 0, dest.Length);
 
