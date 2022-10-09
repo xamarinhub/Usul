@@ -1,0 +1,51 @@
+﻿@page "/"
+@using Usul.Providers
+@using Usul.Providers.SerialPort
+@inject IProviderManager ProviderManager
+
+<h1>Usul</h1>
+    
+<div>
+Port: @_portName
+Info: @_info
+</div>
+
+<button @onclick="Scan" >Scan</button>
+
+@code {
+    private ISerialPortProvider _serialPortProvider;
+
+    private string _portName;
+    private string _info;
+
+    protected override void OnInitialized()
+    {
+        _serialPortProvider = ProviderManager.GetProvider<ISerialPortProvider>();
+        Scan();
+    }
+
+    private void Scan()
+    {
+        foreach (var portName in _serialPortProvider.GetPortNames())
+        {
+            using var serialPort = _serialPortProvider.Open(new SerialPortConfiguration(portName));
+            var result = GetInfo(serialPort);
+            if (string.IsNullOrEmpty(result))
+            {
+                continue;
+            }
+
+            _portName = portName;
+            _info = result;
+            break;
+        }
+    }
+
+    private static string GetInfo(ISerialPort serialPort)
+    {
+        serialPort.WriteLine("M115");
+        Thread.Sleep(2000);
+        return serialPort.ReadExisting();
+    }
+
+}
