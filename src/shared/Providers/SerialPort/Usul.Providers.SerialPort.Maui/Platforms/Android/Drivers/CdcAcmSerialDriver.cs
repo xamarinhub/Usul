@@ -8,7 +8,7 @@
 using Android.Hardware.Usb;
 using Android.OS;
 using Android.Util;
-using Hoho.Android.UsbSerial.Util;
+//using Hoho.Android.UsbSerial.Util;
 using Java.Lang;
 using Java.Nio;
 using Usul.Providers.SerialPort.Maui.Implementation.Extensions;
