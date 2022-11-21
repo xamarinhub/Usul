@@ -1,2 +1,2 @@
 # Usul
-Multi-platform NETCore framework
+Multi-platform NET framework
